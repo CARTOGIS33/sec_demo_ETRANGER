@@ -522,9 +522,9 @@
         bounds_group.addLayer(layer_CARREFPORTAILSRP_6);
         cluster_CARREFPORTAILSRP_6.addTo(map);
         map.on("zoomend", function (e) {
-            if (map.getZoom() <= 15 && map.getZoom() >= 8) {
+            if (map.getZoom() <= 22 && map.getZoom() >= 8) {
                 map.addLayer(layer_Fonddeplancarte_0);
-            } else if (map.getZoom() > 15 || map.getZoom() < 8) {
+            } else if (map.getZoom() > 22 || map.getZoom() < 8) {
                 map.removeLayer(layer_Fonddeplancarte_0);
             }
             if (map.getZoom() <= 19 && map.getZoom() >= 15) {
@@ -558,9 +558,9 @@
                 map.removeLayer(cluster_CARREFPORTAILSRP_6);
             }
         });
-        if (map.getZoom() <= 15 && map.getZoom() >= 8) {
+        if (map.getZoom() <= 22 && map.getZoom() >= 8) {
             map.addLayer(layer_Fonddeplancarte_0);
-        } else if (map.getZoom() > 15 || map.getZoom() < 8) {
+        } else if (map.getZoom() > 22 || map.getZoom() < 8) {
             map.removeLayer(layer_Fonddeplancarte_0);
         }
         if (map.getZoom() <= 19 && map.getZoom() >= 15) {
