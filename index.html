@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="css/L.Control.Locate.min.css">
     <link rel="stylesheet" href="css/qgis2web.css">
     <link rel="stylesheet" href="css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/MarkerCluster.css">
-    <link rel="stylesheet" href="css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
     <style>
         html,
@@ -41,7 +39,6 @@
     <script src="js/labelgun.min.js"></script>
     <script src="js/labels.js"></script>
     <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-    <script src="js/leaflet.markercluster.js"></script>
     <script src="data/SECTEURS_2.js"></script>
     <script src="data/ZONEDETRAVAIL_3.js"></script>
     <script src="data/BATIMENTS_4.js"></script>
@@ -50,7 +47,7 @@
     <script>
         var map = L.map('map', {
             zoomControl: true, maxZoom: 28, minZoom: 1
-        }).fitBounds([[-2.3888687652719325, 29.47539751389528], [-1.4540667411738306, 30.786861174378338]]);
+        }).fitBounds([[-2.8043999163896514, 28.76996499412313], [-0.9352914036104508, 31.392750365601927]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://www.cartogis.fr/" target="_blank">CARTOGIS</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org"></a>');
         var autolinker = new Autolinker({ truncate: { length: 30, location: 'smart' } });
@@ -447,7 +444,7 @@
                 case 'Carrefour':
                     return {
                         pane: 'pane_CARREFPORTAILSRP_6',
-                        radius: 5.999999999999998,
+                        radius: 6.0,
                         opacity: 1,
                         color: 'rgba(179,92,21,1.0)',
                         dashArray: '',
@@ -463,24 +460,23 @@
                 case 'Portail':
                     return {
                         pane: 'pane_CARREFPORTAILSRP_6',
-                        shape: 'diamond',
-                        radius: 8.8,
+                        radius: 5.599999999999998,
                         opacity: 1,
-                        color: 'rgba(50,87,128,1.0)',
+                        color: 'rgba(84,84,0,1.0)',
                         dashArray: '',
                         lineCap: 'butt',
                         lineJoin: 'miter',
                         weight: 2.0,
                         fill: true,
                         fillOpacity: 1,
-                        fillColor: 'rgba(255,255,0,1.0)',
+                        fillColor: 'rgba(250,255,57,1.0)',
                         interactive: true,
                     }
                     break;
                 case 'Rond-point':
                     return {
                         pane: 'pane_CARREFPORTAILSRP_6',
-                        radius: 7.199999999999999,
+                        radius: 7.2,
                         opacity: 1,
                         color: 'rgba(50,87,128,1.0)',
                         dashArray: '',
@@ -513,18 +509,12 @@
                 return L.circleMarker(latlng, style_CARREFPORTAILSRP_6_0(feature));
             },
         });
-        var cluster_CARREFPORTAILSRP_6 = new L.MarkerClusterGroup({
-            showCoverageOnHover: false,
-            spiderfyDistanceMultiplier: 2
-        });
-        cluster_CARREFPORTAILSRP_6.addLayer(layer_CARREFPORTAILSRP_6);
-
         bounds_group.addLayer(layer_CARREFPORTAILSRP_6);
-        cluster_CARREFPORTAILSRP_6.addTo(map);
+        map.addLayer(layer_CARREFPORTAILSRP_6);
         map.on("zoomend", function (e) {
-            if (map.getZoom() <= 22 && map.getZoom() >= 8) {
+            if (map.getZoom() <= 15 && map.getZoom() >= 2) {
                 map.addLayer(layer_Fonddeplancarte_0);
-            } else if (map.getZoom() > 22 || map.getZoom() < 8) {
+            } else if (map.getZoom() > 15 || map.getZoom() < 2) {
                 map.removeLayer(layer_Fonddeplancarte_0);
             }
             if (map.getZoom() <= 19 && map.getZoom() >= 15) {
@@ -537,9 +527,9 @@
             } else if (map.getZoom() > 19 || map.getZoom() < 12) {
                 map.removeLayer(layer_SECTEURS_2);
             }
-            if (map.getZoom() <= 13 && map.getZoom() >= 9) {
+            if (map.getZoom() <= 13 && map.getZoom() >= 8) {
                 map.addLayer(layer_ZONEDETRAVAIL_3);
-            } else if (map.getZoom() > 13 || map.getZoom() < 9) {
+            } else if (map.getZoom() > 13 || map.getZoom() < 8) {
                 map.removeLayer(layer_ZONEDETRAVAIL_3);
             }
             if (map.getZoom() <= 19 && map.getZoom() >= 15) {
@@ -553,14 +543,14 @@
                 map.removeLayer(layer_ITINERAIRES_5);
             }
             if (map.getZoom() <= 19 && map.getZoom() >= 13) {
-                map.addLayer(cluster_CARREFPORTAILSRP_6);
+                map.addLayer(layer_CARREFPORTAILSRP_6);
             } else if (map.getZoom() > 19 || map.getZoom() < 13) {
-                map.removeLayer(cluster_CARREFPORTAILSRP_6);
+                map.removeLayer(layer_CARREFPORTAILSRP_6);
             }
         });
-        if (map.getZoom() <= 22 && map.getZoom() >= 8) {
+        if (map.getZoom() <= 15 && map.getZoom() >= 2) {
             map.addLayer(layer_Fonddeplancarte_0);
-        } else if (map.getZoom() > 22 || map.getZoom() < 8) {
+        } else if (map.getZoom() > 15 || map.getZoom() < 2) {
             map.removeLayer(layer_Fonddeplancarte_0);
         }
         if (map.getZoom() <= 19 && map.getZoom() >= 15) {
@@ -573,9 +563,9 @@
         } else if (map.getZoom() > 19 || map.getZoom() < 12) {
             map.removeLayer(layer_SECTEURS_2);
         }
-        if (map.getZoom() <= 13 && map.getZoom() >= 9) {
+        if (map.getZoom() <= 13 && map.getZoom() >= 8) {
             map.addLayer(layer_ZONEDETRAVAIL_3);
-        } else if (map.getZoom() > 13 || map.getZoom() < 9) {
+        } else if (map.getZoom() > 13 || map.getZoom() < 8) {
             map.removeLayer(layer_ZONEDETRAVAIL_3);
         }
         if (map.getZoom() <= 19 && map.getZoom() >= 15) {
@@ -589,9 +579,9 @@
             map.removeLayer(layer_ITINERAIRES_5);
         }
         if (map.getZoom() <= 19 && map.getZoom() >= 13) {
-            map.addLayer(cluster_CARREFPORTAILSRP_6);
+            map.addLayer(layer_CARREFPORTAILSRP_6);
         } else if (map.getZoom() > 19 || map.getZoom() < 13) {
-            map.removeLayer(cluster_CARREFPORTAILSRP_6);
+            map.removeLayer(layer_CARREFPORTAILSRP_6);
         }
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
@@ -604,7 +594,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
             .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps, { 'CARREF/PORTAILS/RP<br /><table><tr><td style="text-align: center;"><img src="legend/CARREFPORTAILSRP_6_Carrefour0.png" /></td><td>Carrefour</td></tr><tr><td style="text-align: center;"><img src="legend/CARREFPORTAILSRP_6_Portail1.png" /></td><td>Portail</td></tr><tr><td style="text-align: center;"><img src="legend/CARREFPORTAILSRP_6_Rondpoint2.png" /></td><td>Rond-point</td></tr></table>': cluster_CARREFPORTAILSRP_6, 'ITINERAIRES<br /><table><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I1137KMS0.png" /></td><td>I1/13.7 KMS</td></tr><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I2147KMS1.png" /></td><td>I2/14/7 KMS</td></tr><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I357KMS2.png" /></td><td>I3/5.7 KMS</td></tr><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I472KMS3.png" /></td><td>I4/7.2 KMS</td></tr><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I572KMS4.png" /></td><td>I5/7.2 KMS</td></tr></table>': layer_ITINERAIRES_5, '<img src="legend/BATIMENTS_4.png" /> BATIMENTS': layer_BATIMENTS_4, 'ZONE DE TRAVAIL<br /><table><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_54.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_65.png" /></td><td>6</td></tr></table>': layer_ZONEDETRAVAIL_3, 'SECTEURS<br /><table><tr><td style="text-align: center;"><img src="legend/SECTEURS_2_Secteur20.png" /></td><td>Secteur_2</td></tr><tr><td style="text-align: center;"><img src="legend/SECTEURS_2_Secteur31.png" /></td><td>Secteur_3</td></tr><tr><td style="text-align: center;"><img src="legend/SECTEURS_2_Secteur42.png" /></td><td>Secteur_4</td></tr><tr><td style="text-align: center;"><img src="legend/SECTEURS_2_Secteurs13.png" /></td><td>Secteurs_1</td></tr></table>': layer_SECTEURS_2, "Fond de plan satellite": layer_Fonddeplansatellite_1, "Fond de plan carte": layer_Fonddeplancarte_0, }).addTo(map);
+        L.control.layers(baseMaps, { 'CARREF/PORTAILS/RP<br /><table><tr><td style="text-align: center;"><img src="legend/CARREFPORTAILSRP_6_Carrefour0.png" /></td><td>Carrefour</td></tr><tr><td style="text-align: center;"><img src="legend/CARREFPORTAILSRP_6_Portail1.png" /></td><td>Portail</td></tr><tr><td style="text-align: center;"><img src="legend/CARREFPORTAILSRP_6_Rondpoint2.png" /></td><td>Rond-point</td></tr></table>': layer_CARREFPORTAILSRP_6, 'ITINERAIRES<br /><table><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I1137KMS0.png" /></td><td>I1/13.7 KMS</td></tr><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I2147KMS1.png" /></td><td>I2/14/7 KMS</td></tr><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I357KMS2.png" /></td><td>I3/5.7 KMS</td></tr><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I472KMS3.png" /></td><td>I4/7.2 KMS</td></tr><tr><td style="text-align: center;"><img src="legend/ITINERAIRES_5_I572KMS4.png" /></td><td>I5/7.2 KMS</td></tr></table>': layer_ITINERAIRES_5, '<img src="legend/BATIMENTS_4.png" /> BATIMENTS': layer_BATIMENTS_4, 'ZONE DE TRAVAIL<br /><table><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_43.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_54.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/ZONEDETRAVAIL_3_65.png" /></td><td>6</td></tr></table>': layer_ZONEDETRAVAIL_3, 'SECTEURS<br /><table><tr><td style="text-align: center;"><img src="legend/SECTEURS_2_Secteur20.png" /></td><td>Secteur_2</td></tr><tr><td style="text-align: center;"><img src="legend/SECTEURS_2_Secteur31.png" /></td><td>Secteur_3</td></tr><tr><td style="text-align: center;"><img src="legend/SECTEURS_2_Secteur42.png" /></td><td>Secteur_4</td></tr><tr><td style="text-align: center;"><img src="legend/SECTEURS_2_Secteurs13.png" /></td><td>Secteurs_1</td></tr></table>': layer_SECTEURS_2, "Fond de plan satellite": layer_Fonddeplansatellite_1, "Fond de plan carte": layer_Fonddeplancarte_0, }).addTo(map);
         setBounds();
     </script>
 </body>
